@@ -5,6 +5,7 @@ import { WorkspaceModel } from "./workspace.model";
 import httpStatus from "http-status";
 import { generateInviteCode } from "../../utils/genrate-invite-code";
 import { FAMILY_DEFAULT_CATEGORIES, STUDENT_DEFAULT_CATEGORIES } from "../../constant/workspace/constant.workspace";
+import { getIo } from "../../config/socket/socket.config";
 
 
 
@@ -75,7 +76,9 @@ const createWorkSpace = async (
                 message: "Invalid workspace type.",
             });
         }
- 
+
+   
+
         return res.status(httpStatus.CREATED).json({
             success: true,
             message: "Workspace created successfully",
@@ -131,8 +134,11 @@ const updateWorkSpace = async (
         if (description !== undefined) workspace.description = description;
         if (isPrivate !== undefined) workspace.isPrivate = isPrivate;
 
-        await workspace.save();
 
+        
+
+        await workspace.save();
+      
         return res.status(httpStatus.OK).json({
             success: true,
             message: "Workspace updated successfully",

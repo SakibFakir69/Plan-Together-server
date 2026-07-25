@@ -129,6 +129,8 @@ export const assignTask = async (req: Request, res: Response, next: NextFunction
 
 export const completeTask = async (req: Request, res: Response, next: NextFunction) => {
     try {
+        
+
         const { taskId } = req.params;
         const completedBy = req.user?.id;
 
@@ -150,7 +152,7 @@ export const completeTask = async (req: Request, res: Response, next: NextFuncti
             return res.status(httpStatus.NOT_FOUND).json({ success: false, message: "Task not found" });
         }
 
-        // TODO: if rewardPoints > 0, trigger reward payout / activity log entry here
+       
 
         return res.status(httpStatus.OK).json({ success: true, message: "Task completed", data: task });
     } catch (error) {

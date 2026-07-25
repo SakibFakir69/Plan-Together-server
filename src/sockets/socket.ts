@@ -32,9 +32,10 @@ const initSocket = (mainServer: http.Server) => {
     })
 
 
+
     io.on("connection", (socket) => {
 
-        console.log("[Conncted User] : =>", socket.id)
+        console.log("[Conncted User] : =>", socket.data.userId)
         onlineUsers.set("name", socket.id);
 
 

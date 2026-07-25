@@ -4,6 +4,7 @@ import http from 'http';
 import app from ".";
 import initSocket from "./sockets/socket";
 
+
 if(!process.env.PORT)
 {
     throw new Error( "PORT env not founded");
@@ -16,6 +17,7 @@ const httpServerAppSocket =http.createServer(app);
 initSocket(httpServerAppSocket);
 
 
+
 (async()=>{
 
     try {
@@ -23,10 +25,14 @@ initSocket(httpServerAppSocket);
         {
             throw new Error("Please provide mongodb url")
         }
+       
        await mongoose.connect(process.env.MONGO_URL)
         .then((res)=>{
             console.log("[ MongoDB connected ]")
+            
+
         })
+
         .catch((error)=>{
             console.log("[MongoDB]", error)
         })

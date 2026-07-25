@@ -6,8 +6,8 @@ import { userRouter } from './modules/users/user.route';
 import { authRouter } from './modules/auth/auth.route';
 import { GlobalErrorHandler } from './middlewares/global-error-hander';
 import { workSpaceRouter } from './modules/workspace/workspace.route';
-import socketConfig from './config/socket/socket.config';
 import { taskRouter } from './modules/task/task.route';
+import swaggerDocs from './swagger-ui/swagger-ui-config';
 
 
 const app= express();
@@ -16,13 +16,17 @@ const app= express();
 // MIDDLEWARE
 app.use(express.json())
 
+// HACKER LESS KNOW ABOUT OUR STACK
+app.disable('x-powered-by');
 
+// SWAGGER DOCS
+swaggerDocs(app)
 
 // API
-app.use('/api/v1/users',userRouter);
-app.use('/api/v1/auth',authRouter);
-app.use('/api/v1/workspace',workSpaceRouter);
-app.use('/api/v1/task', taskRouter);
+app.use('/api/v1/users', userRouter);
+app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/workspaces', workSpaceRouter);
+app.use('/api/v1/tasks', taskRouter);
 
 // NOT FOUNDED
 app.use((req,res)=>{
